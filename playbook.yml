@@ -17,10 +17,12 @@
       #path a la racine de ma VM
         dest: ./
     #Installation de la librairie pour linker le script python à psql
-    #- name : Installation de psycopg2
-    #  apt:
-    #    name: python-psycopg2
-    #    state: latest
+    - name : Installation de psycopg2
+      apt:
+        name: 
+          - python-psycopg2
+          - python3-flask
+        state: latest
     #Run du script
     #- name: Create user psql
     #  postgresql_user:

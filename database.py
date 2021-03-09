@@ -5,6 +5,7 @@ class Create_and_set_database():
     def __init__(self):
         self.conn = self.connection_db()
         self.createTable()
+        self.insertData()
 
     def connection_db(self):
         try:
@@ -21,10 +22,21 @@ class Create_and_set_database():
     def createTable (self):
         try:
             sql_query = self.conn.cursor()
-            sql_query.execute("CREATE TABLE table_test (id serial PRIMARY KEY NOT NULL, nom VARCHAR(100) NOT NULL)")
+            sql_query.execute("CREATE TABLE IF NOT EXISTS table_test (id serial PRIMARY KEY NOT NULL, nom VARCHAR(100) NOT NULL)")
             self.conn.commit()
         except Exception as e:
             print("Error :", e)
+    
+    def insertData(self):
+        try:
+            sql_query = self.conn.cursor()
+            sql_query.execute("INSERT INTO table_test (nom) VALUES ('John');")
+            sql_query.execute("INSERT INTO table_test (nom) VALUES ('Doe');")
+            sql_query.execute("INSERT INTO table_test (nom) VALUES ('Omer');")
+            self.conn.commit()
+        except Exception as e:
+            print("Error :", e)
+
 
 
 db = Create_and_set_database ()
