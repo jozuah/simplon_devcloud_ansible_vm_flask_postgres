@@ -22,6 +22,7 @@ class Create_and_set_database():
     def createTable (self):
         try:
             sql_query = self.conn.cursor()
+            sql_query.execute("DROP TABLE table_test")
             sql_query.execute("CREATE TABLE IF NOT EXISTS table_test (id serial PRIMARY KEY NOT NULL, nom VARCHAR(100) NOT NULL)")
             self.conn.commit()
         except Exception as e:

@@ -4,8 +4,15 @@ from flask import jsonify
 
 import psycopg2
 
+app = Flask(__name__)
+
 
 @app.route('/')
+def hello():
+    return "hello"
+
+
+@app.route('/test')
 def showData():
     try:
         conn = psycopg2.connect(host='localhost',
@@ -14,6 +21,7 @@ def showData():
                                     password='pw')
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM table_test;")
+        print("Je suis laaaaaaaaa")
         myresult = cursor.fetchall()
         #fermeture de la base de donnée
         conn.close()
