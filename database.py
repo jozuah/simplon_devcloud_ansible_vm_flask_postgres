@@ -22,8 +22,8 @@ class Create_and_set_database():
     def createTable (self):
         try:
             sql_query = self.conn.cursor()
-            sql_query.execute("DROP TABLE table_test")
-            sql_query.execute("CREATE TABLE IF NOT EXISTS table_test (id serial PRIMARY KEY NOT NULL, nom VARCHAR(100) NOT NULL)")
+            #sql_query.execute("DROP TABLE MaTable")
+            sql_query.execute("CREATE TABLE IF NOT EXISTS matable (id serial PRIMARY KEY NOT NULL)")
             self.conn.commit()
         except Exception as e:
             print("Error :", e)
@@ -31,12 +31,12 @@ class Create_and_set_database():
     def insertData(self):
         try:
             sql_query = self.conn.cursor()
-            sql_query.execute("INSERT INTO table_test (nom) VALUES ('John');")
-            sql_query.execute("INSERT INTO table_test (nom) VALUES ('Doe');")
-            sql_query.execute("INSERT INTO table_test (nom) VALUES ('Omer');")
+            sql_query.execute("INSERT INTO matable (id) VALUES (DEFAULT);")
             self.conn.commit()
         except Exception as e:
             print("Error :", e)
+    
+
 
 
 

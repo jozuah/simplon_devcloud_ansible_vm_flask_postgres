@@ -1,13 +1,13 @@
-- name: VM Adlane config app flask
+- name: Config app flask
   hosts: josh-host
   become: yes
   become_method: sudo
-  remote_user: adlane-vm-user
+  remote_user: adlane-vm-user #mettre son propre user
   tasks:
-    #- apt:
-    #    name: 
-    #      - postgresql
-    #    state: latest
+    - apt:
+        name: 
+          - postgresql
+        state: latest
 
     #Je veux copier le dossier ou se trouve mon ansible et tous mes fichier
     - name: Copier dossier git
@@ -22,12 +22,9 @@
         name: 
           - python-psycopg2
           - python3-flask
+          - python3-jinja2
         state: latest
-    #Run du script
-    #- name: Create user psql
-    #  postgresql_user:
-    #    name: josh
-    #    password: 123
+
     - name: Create user psql
       become: yes
       become_user: postgres
@@ -43,8 +40,8 @@
           name: "dbtest"
           owner: "postgres"
 
-    - name: Execute script database
-      command: python3 /home/adlane-vm-user/Brief25_Ansible_pg_flask/database.py
-        
+    - name: Execute script database.py
+      command: python3 ./Brief25_Ansible_pg_flask/database.py
+
     - name: Execute script app.py
-      command: python3 /home/adlane-vm-user/Brief25_Ansible_pg_flask/app.py
+      command: python3 ./Brief25_Ansible_pg_flask/app.py
