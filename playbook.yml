@@ -2,9 +2,10 @@
   hosts: josh-host
   become: yes
   become_method: sudo
-  remote_user: adlane-vm-user #mettre son propre user
+  remote_user: #mettre son propre user
   tasks:
-    - apt:
+    - name: Installation postgresql
+      apt:
         name: 
           - postgresql
         state: latest
@@ -17,9 +18,10 @@
       #path a la racine de ma VM
         dest: ./
     #Installation de la librairie pour linker le script python à psql
-    - name : Installation de psycopg2 & flask
+    - name : Installation de psycopg2, flask, jinja2
       apt:
         name: 
+          - python-psycopg2
           - python-psycopg2
           - python3-flask
           - python3-jinja2
@@ -41,7 +43,7 @@
           owner: "postgres"
 
     - name: Execute script database.py
-      command: python3 ./Brief25_Ansible_pg_flask/database.py
+      command: python3 ./simplon_devcloud_ansible_vm_flask_postgres/database.py
 
     - name: Execute script app.py
-      command: python3 ./Brief25_Ansible_pg_flask/app.py
+      command: python3 ./simplon_devcloud_ansible_vm_flask_postgres/app.py
